@@ -9,6 +9,26 @@ enabled = true
 pattern = "${CUSTOM_DOMAIN}"
 custom_domain = true
 
+[[routes]]
+pattern = "mail.laurt.com"
+custom_domain = true
+
+[[routes]]
+pattern = "mail.bidprotestnav.com"
+custom_domain = true
+
+[[routes]]
+pattern = "mail.lexnav.ai"
+custom_domain = true
+
+[[routes]]
+pattern = "mail.ledgercanary.com"
+custom_domain = true
+
+[[routes]]
+pattern = "mail.difflite.com"
+custom_domain = true
+
 [[d1_databases]]
 binding = "db"
 database_name = "cloud-mail"
