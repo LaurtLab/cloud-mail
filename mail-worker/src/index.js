@@ -6,6 +6,7 @@ import emailService from './service/email-service';
 import kvObjService from './service/kv-obj-service';
 import oauthService from "./service/oauth-service";
 import analysisService from './service/analysis-service';
+import backupService from './service/backup-service';
 export default {
 	 async fetch(req, env, ctx) {
 
@@ -35,5 +36,13 @@ export default {
 		await emailService.completeReceiveAll({ env })
 		await oauthService.clearNoBindOathUser({ env })
 		await analysisService.refreshEchartsCache({ env })
+
+		// Daily D1 backup to R2 (isolated: a backup failure must not break housekeeping).
+		try {
+			const r = await backupService.backupToR2({ env })
+			console.log('[backup]', JSON.stringify(r))
+		} catch (e) {
+			console.error('[backup] failed', e && e.stack || e)
+		}
 	},
 };
